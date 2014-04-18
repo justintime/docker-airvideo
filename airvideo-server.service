@@ -1,0 +1,9 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE service-group SYSTEM "avahi-service.dtd">
+<service-group>
+<name replace-wildcards="yes">AirVideo Server on %h</name>
+<service>
+<type>_airvideoserver._tcp</type>
+<port>45631</port>
+</service>
+</service-group>

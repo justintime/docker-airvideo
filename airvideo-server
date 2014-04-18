@@ -1,0 +1,8 @@
+#!/bin/sh
+AVS_HOME=/opt/airvideo-server
+
+if [ -f $HOME/.config/airvideo-server/server.properties ]; then
+  java -jar $AVS_HOME/AirVideoServerLinux.jar $HOME/.config/airvideo-server/server.properties
+else
+  java -jar $AVS_HOME/AirVideoServerLinux.jar $AVS_HOME/AirVideoServerLinux.properties $@
+fi
