@@ -23,6 +23,7 @@ ADD airvideo-server.service /etc/avahi/services/
 ADD airvideo-server /usr/bin/
 RUN mkdir -p /opt/airvideo-server/bin
 ADD http://s3.amazonaws.com/AirVideo/Linux-2.4.6-beta3/AirVideoServerLinux.jar /opt/airvideo-server/AirVideoServerLinux.jar
+RUN chmod +r /opt/airvideo-server/AirVideoServerLinux.jar
 
 # compile avconv
 RUN apt-get install -y build-essential libmp3lame-dev libfaac-dev yasm pkg-config && \
