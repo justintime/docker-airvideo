@@ -2,7 +2,7 @@
 
 FROM ubuntu:14.04
 
-MAINTAINER menghan
+MAINTAINER Menghan Zheng <menghan412@gmail.com>
 
 ADD multiverse.sources.list /etc/apt/sources.list.d/
 
@@ -40,6 +40,11 @@ RUN apt-get install -y build-essential libmp3lame-dev libfaac-dev yasm pkg-confi
 	    rm -rf /tmp/libav.tar.bz2 /tmp/libav
 
 # add user
-RUN adduser --uid 1000 --group --system avuser
-RUN mkdir -p /home/avuser/.air-video-server
-RUN chown avuser:avuser /home/avuser/.air-video-server
+RUN adduser --uid 1000 --group --system user
+RUN mkdir -p /home/user/.air-video-server
+RUN chown user:user /home/user/.air-video-server
+
+# runtime settings
+VOLUME /home/user/.air-video-server
+ENV LANG C.UTF-8
+CMD airvideo-server
