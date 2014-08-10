@@ -9,7 +9,7 @@ ADD multiverse.sources.list /etc/apt/sources.list.d/
 RUN apt-get update
 
 # dependicies of airvideo
-RUN apt-get -y --no-install-recommends install libmp3lame0 libx264-dev libfaac0 faac openjdk-6-jre avahi-daemon
+RUN apt-get -y --no-install-recommends install libmp3lame0 libx264-dev libfaac0 faac openjdk-6-jre
 
 # install fonts
 RUN apt-get -y --no-install-recommends install ttf-wqy-microhei fonts-dejavu
@@ -19,7 +19,6 @@ RUN apt-get -y --no-install-recommends install curl
 
 # airvideo server's files
 ADD AirVideoServerLinux.properties /opt/airvideo-server/
-ADD airvideo-server.service /etc/avahi/services/
 ADD airvideo-server /usr/bin/
 RUN mkdir -p /opt/airvideo-server/bin
 ADD http://s3.amazonaws.com/AirVideo/Linux-2.4.6-beta3/AirVideoServerLinux.jar /opt/airvideo-server/AirVideoServerLinux.jar
