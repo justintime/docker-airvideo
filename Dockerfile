@@ -29,8 +29,10 @@ RUN apt-get install -y build-essential libmp3lame-dev libfaac-dev yasm pkg-confi
 	    apt-get purge -y build-essential libmp3lame-dev libfaac-dev yasm pkg-config curl && \
 	    apt-get autoremove -y && apt-get clean
 
-RUN mkdir -p /var/lib/airvideo-server && chmod 777 /var/lib/airvideo-server
-ENV HOME /var/lib/airvideo-server
-VOLUME /var/lib/airvideo-server
+VOLUME /var/lib/airvideo-server/
+RUN chmod -R 777 /var/lib/airvideo-server
+
+# force use /var/lib/airvideo-server as $HOME for all `user*` users
+RUN sed -i 's#/home/user[0-9]\{4\}#/var/lib/airvideo-server#' /etc/passwd
 
 CMD airvideo-server

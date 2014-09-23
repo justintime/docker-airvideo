@@ -1,4 +1,8 @@
-#!/bin/sh
+#!/usr/bin/env bash
+
+umask 0000
+mkdir -p $HOME/.air-video-server
+
 AVS_HOME=/opt/airvideo-server
 
 if [ -f $HOME/.config/airvideo-server/server.properties ]; then
