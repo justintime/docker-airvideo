@@ -1,14 +1,15 @@
 # ref: http://www.inmethod.com/forum/posts/list/1856.page
 
-FROM ubuntu:14.04
+FROM menghan/base
 
 MAINTAINER Menghan Zheng <menghan412@gmail.com>
 
-ADD multiverse.sources.list /etc/apt/sources.list.d/
-
+ADD multimedia.list /etc/apt/sources.list.d/
 # dependicies of airvideo and fonts
 RUN apt-get update && \
-	    apt-get -y --no-install-recommends install libmp3lame0 libx264-dev libfaac0 faac openjdk-6-jre ttf-wqy-microhei fonts-dejavu
+	    apt-get install -y --force-yes deb-multimedia-keyring && \
+	    apt-get update && \
+	    apt-get -y --no-install-recommends install libmp3lame0 libx264-dev libfaac0 faac openjdk-6-jre ttf-wqy-microhei ttf-dejavu
 
 # airvideo server's files
 ADD AirVideoServerLinux.properties /opt/airvideo-server/
@@ -28,12 +29,8 @@ RUN apt-get install -y build-essential libmp3lame-dev libfaac-dev yasm pkg-confi
 	    apt-get purge -y build-essential libmp3lame-dev libfaac-dev yasm pkg-config curl && \
 	    apt-get autoremove -y && apt-get clean
 
-# add user
-RUN adduser --uid 1000 --group --system user
-USER user
-RUN mkdir -p /home/user/.air-video-server
+RUN mkdir -p /var/lib/airvideo-server && chmod 777 /var/lib/airvideo-server
+ENV HOME /var/lib/airvideo-server
+VOLUME /var/lib/airvideo-server
 
-# runtime settings
-VOLUME /home/user/.air-video-server/
-ENV LANG C.UTF-8
 CMD airvideo-server
