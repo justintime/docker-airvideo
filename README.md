@@ -7,8 +7,8 @@ setup
 --------
 
 ```
-docker pull menghan/airvideo-server-in-docker
-docker run -d --name airvideo-runner -u user -p 45631:45631 -p 46631:46631 -v /path/to/my/movies:/Movies menghan/airvideo-server-in-docker
+docker pull justintime/airvideo
+docker run -d --name airvideo -h airvideo -p 45631:45631 -p 46631:46631 -v /net/je-nas/c/media:/Movies justintime/airvideo
 ```
 
 note
