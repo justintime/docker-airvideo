@@ -1,6 +1,6 @@
 #!/bin/bash
 chmod +r /opt/airvideo-server/AirVideoServerLinux.jar
-
+adduser --home /opt/airvideo-server airvideo
 # compile avconv
 curl -s -o - http://s3.amazonaws.com/AirVideo/Linux-2.4.6-beta3/libav.tar.bz2 | tar -xj -C /tmp 
 cd /tmp/libav 
@@ -15,7 +15,7 @@ sed -i 's#/home/user[0-9]\{4\}#/var/lib/airvideo-server#' /etc/passwd
 # Create the init script for pytivo
 cat <<EOD > /etc/my_init.d/airvideo.sh
 #!/bin/bash
-exec /usr/bin/airvideo-server
+exec /sbin/setuser airvideo /usr/bin/airvideo-server
 EOD
 
 chmod 755 /etc/my_init.d/airvideo.sh
