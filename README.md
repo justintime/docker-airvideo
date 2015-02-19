@@ -7,8 +7,7 @@ setup
 --------
 
 ```
-docker pull justintime/airvideo
-docker run -d --name airvideo -h airvideo -p 45631:45631 -p 46631:46631 -v /net/je-nas/c/media:/Movies justintime/airvideo
+docker run -d --restart=always --name airvideo -h airvideo -p 45631:45631 -p 46631:46631 -v /net/je-nas/c/media:/Movies justintime/airvideo
 ```
 
 note
